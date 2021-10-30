@@ -39,8 +39,9 @@ jobs:
 
     - name: Install TA-Lib Python
       if: steps.cache-python.outputs.cache-hit != 'true'
-#       env:
-#         LD_LIBRARY_PATH: ${{ env.pythonLocation }}/extern/lib
+      env:
+        TA_LIBRARY_PATH:${{ env.pythonLocation }}/lib
+        TA_INCLUDE_PATH:${{ env.pythonLocation }}/include
       run: |
         pip install TA-Lib
       
@@ -51,3 +52,7 @@ jobs:
         echo $LD_LIBRARY_PATH
         echo $PATH
         ls ${{ env.pythonLocation }}
+        echo "--lib"
+        ls ${{ env.pythonLocation }}/lib
+        echo "--inc"
+        ls ${{ env.pythonLocation }}/include
